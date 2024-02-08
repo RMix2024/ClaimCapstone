@@ -1,0 +1,39 @@
+﻿@page "{id}"
+@model E85Carbs.WebServer.Pages.ProductGalleryImages.ProductGalleryImagesMenuModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Product Gallery Photos";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mt-4 mb-4">@ViewData["Title"]</h2>
+        </div>
+        <div>
+            @if (Model.ProductGalleryImages.Count != 0)
+            {
+                @foreach (var productGalleryImage in Model.ProductGalleryImages)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <!-- Bootstrap 5 card box -->
+                        <div class="card-box">
+                            <div class="card-thumbnail">
+                                <img src="data:image/gif;base64,@productGalleryImage.ProductGalleryBase64Image" class="img-fluid" alt="Card image cap">
+                            </div>
+                            <h3><a href="#" class="mt-2 text-danger">@productGalleryImage.ProductGalleryImageName</a></h3>
+                            <a asp-page="/ProductGalleryImages/DeleteProductGalleryImage" asp-route-id="@productGalleryImage.ProductGalleryImageId" class="btn btn-danger float-left">Remove</a><br />
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div><h3>There are no photos uploaded at this time</h3></div>
+            }
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-page="/ProductGalleryImages/AddProductGalleryImage" asp-route-id="@Model.product.ProductId" class="btn btn-success">Add another Photo</a>
+</div>

@@ -1,0 +1,58 @@
+﻿@page
+@model E85Carbs.WebServer.Pages.Products.ProductsMenuModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Product Menu";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a asp-page="/Products/AddProduct" class="btn btn-success">Add new Product</a>
+<br />
+
+<a asp-page="/Products/EditPricesByMakeCat" class="btn btn-danger"> Edit Product bulk pricing</a>
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form method="post" asp-page-handler="Submit">
+                <label>Brands</label>
+                <select asp-items="Model.MakeDropdownList" asp-for="makeName"></select><br />
+                <label>Categories</label>
+                <select asp-items="Model.CategoryDropdownList" asp-for="categoryName"></select><br />
+                <input type="submit" value="Submit" class="btn btn-info">
+            </form>
+            <div></div>
+            <form method="get">
+                <input type="submit" value="Reset" class="btn btn-warning">
+            </form>
+            <h2 class="mt-4 mb-4">Products</h2>
+        </div>
+
+        <div class="products">
+            <div class="row no-gutters">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-md-3 mt-3 card flex-fill card-box card-body bg-light text-center">
+                        <div class="card-img-actions card-thumbnail">
+                            <img src="data:image/gif;base64,@product.MainBase64Image" class="card-img img-fluid">
+                        </div>
+                        <div class="container-fluid flex-fill"></div>
+                        <h3><a href="#" class="mt-2 text-danger">@product.ProductName</a></h3>
+                        <p class="text-secondary">@product.ProductDescription</p>
+                        <a type="button" asp-page="/Products/DeleteProduct" asp-route-id="@product.ProductId" class="btn btn-danger float-left">Remove</a>
+                        <a type="button" asp-page="/Products/EditProduct" asp-route-id="@product.ProductId" class="btn btn-info float-left">Edit</a>
+                        <a type="button" asp-page="/ProductGalleryImages/ProductGalleryImagesMenu" asp-route-id="@product.ProductId" class="btn btn-success float-left">Photo Gallery Menu</a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*02.07.2022 RM Added Comments*@

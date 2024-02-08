@@ -1,0 +1,79 @@
+﻿@page "{id?}"
+@model E85Carbs.WebServer.Pages.UserStore.UserStoreMainPageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Store";
+}
+
+<h1 class="text-info">@ViewData["Title"]</h1>
+
+
+
+
+<div class="container">
+
+    <div class="content">
+        <div class="col-md-9">
+
+
+
+
+            <form method="post" asp-page-handler="Submit">
+                <label>Brands</label>
+                <select asp-items="Model.MakeDropdownList" asp-for="makeName"></select><br />
+                <label>Categories</label>
+                <select asp-items="Model.CategoryDropdownList" asp-for="categoryName"></select><br />
+                <input type="submit" value="Submit" class="btn btn-info">
+            </form>
+            <div></div>
+            <form method="get">
+                <input type="submit" value="Reset" class="btn btn-warning">
+            </form>
+
+
+
+            <div class="products">
+                <div class="row no-gutters">
+                    @if (Model.Products.Count != 0)
+                    {
+                        @foreach (var product in Model.Products)
+                        {
+
+                            <div class="col-md-3 mt-3 card flex-fill card-box card-body bg-light text-center">
+
+                                <div class="card-img-actions card-thumbnail">
+                                    <img src="data:image/gif;base64,@product.MainBase64Image" class="card-img img-fluid">
+                                </div>
+                                <div class="container-fluid flex-fill"></div>
+                                <div>
+                                    <div class="mb-2">
+                                        <h6 class="font-weight-semibold mb-2">
+                                            <a asp-page="/UserStore/UserProductDetailsPage" asp-route-id="@product.ProductId" class="text-default mb-2" data-abc="true">@product.ProductName</a>
+                                        </h6> <a href="#" class="text-muted" data-abc="true">@product.CategoryName</a>
+                                    </div>
+                                    <h3 class="mb-0 font-weight-semibold">$@product.ProductPrice</h3>
+                                    <div class="align-bottom">
+                                        <form method="post" asp-page="/UserShoppingCart/UserShoppingCart">
+                                            <input type="hidden" name="id" value="@product.ProductId">
+                                            <input type="submit" value="Add to cart" class="btn btn-info">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        }
+                    }
+                    else
+                    {
+                        <div><h3>There are no Products to display!</h3></div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*02.07.2022 RM Added Comments*@

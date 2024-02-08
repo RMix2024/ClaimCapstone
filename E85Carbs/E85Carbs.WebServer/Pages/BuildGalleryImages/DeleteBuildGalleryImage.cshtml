@@ -1,0 +1,28 @@
+﻿@page "{id}"
+@model E85Carbs.WebServer.Pages.BuildGalleryImages.DeleteBuildGalleryImageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Delete Customer build Gallery Photo";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<h2>Are you sure you want to delete this?</h2>
+
+<h3> @Model.BuildGalleryImage.BuildGalleryImageName</h3>
+<div class="card-thumbnail">
+    <img src="data:image/gif;base64,@Model.BuildGalleryImage.BuildGalleryBase64Image" class="img-fluid" alt="Card image cap">
+</div>
+
+
+<div>
+    <form method="post" asp-page-handler="Delete">
+        <input type="hidden" asp-for="@Model.BuildGalleryImage.BuildGalleryImageId" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-page="../BuildGalleryImages/BuildGalleryImagesMenu" asp-route-id="@Model.BuildGalleryImage.CustomerBuildId">Back to build gallery photos Menu</a>
+    </form>
+</div>
+
+@*02.07.2022 RM Added Comments*@

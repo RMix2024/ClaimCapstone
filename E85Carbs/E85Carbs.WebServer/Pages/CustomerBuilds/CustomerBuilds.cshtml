@@ -1,0 +1,48 @@
+﻿@page
+@model E85Carbs.WebServer.Pages.CustomerBuilds.CustomerBuildsModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Customer Projects";
+}
+
+<h1 class="text-info">@ViewData["Title"]</h1>
+<div>
+    <div class="content">
+        <div class="col-md-9">
+            <div class="customerbuilds">
+                <div class="row no-gutters">
+                    @if (Model.CustomerBuilds.Count != 0)
+                    {
+                        @foreach (var customerbuild in Model.CustomerBuilds)
+                        {
+                            <div class="col-md-4 mt-2">
+                                <div class="card flex-fill">
+                                    <div class="card-body">
+                                        <div class="card-img-actions"> <img src="data:image/gif;base64,@customerbuild.MainBase64Image" class="card-img img-fluid" width="96" height="350" alt=""> </div>
+                                    </div>
+                                    <div class="card-body bg-light text-center">
+                                        <div class="mb-2">
+                                            <h6 class="font-weight-semibold mb-2"> <a asp-page="/CustomerBuilds/CustomerBuildDetails" asp-route-id="@customerbuild.CustomerBuildId" class="text-default mb-2" data-abc="true">@customerbuild.CustomerName</a> </h6>
+                                            <h3 class="text-muted" data-abc="true">@customerbuild.CustomerBuildTitle</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        }
+                    }
+                    else
+                    {
+                        <div><h3>There are no Customer Builds to display at this time!</h3></div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*02.07.2022 RM Added Comments*@

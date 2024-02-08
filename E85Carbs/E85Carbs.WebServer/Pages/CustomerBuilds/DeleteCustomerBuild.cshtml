@@ -1,0 +1,25 @@
+﻿@page "{id}"
+@model E85Carbs.WebServer.Pages.CustomerBuilds.DeleteCustomerBuildModel
+@{
+    ViewData["Title"] = "Delete Customer Build";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<h2>Are you sure you want to delete this?</h2>
+
+<h3> @Model.customerBuild.CustomerName</h3>
+
+
+
+<div>
+    <form method="post" asp-page-handler="Delete">
+        <input type="hidden" asp-for="@Model.customerBuild.CustomerBuildId" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-page="./CustomerBuilds/CustomerBuildMenu">Back to customer builds Menu</a>
+    </form>
+</div>
+
+@*02.07.2022 RM Added Comments*@

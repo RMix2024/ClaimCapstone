@@ -1,0 +1,24 @@
+﻿@page
+@model E85Carbs.WebServer.Pages.BuildGalleryImages.AddBuildGalleryImageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Add Gallery Photo";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h2>Customer Build @Model.CustomerBuild.CustomerName</h2>
+
+
+<div>
+    <form method="post" enctype="multipart/form-data" asp-page-handler="Submit">
+        <label>Photo Name:</label>
+        <input type="text" value="Photo Name" asp-for="@Model.Input.BuildGalleryImageName"><br />
+        <label>Customer build Gallery Image:</label>
+        <input type="file" asp-for="@Model.Input.BuildGalleryByte">
+        <input type="hidden" asp-for="@Model.customerbuildid"><br />
+        <input type="submit" value="Submit" class="text-success">
+    </form>
+</div>
+
+@*02.07.2022 RM Added Comments*@

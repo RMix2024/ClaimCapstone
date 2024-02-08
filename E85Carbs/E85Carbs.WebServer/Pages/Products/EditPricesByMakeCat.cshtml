@@ -1,0 +1,45 @@
+﻿@page "{id?}"
+@model E85Carbs.WebServer.Pages.Products.EditPricesByMakeCatModel
+@{
+    ViewData["Title"] = "Edit product Pricing in Bulk";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="post" asp-page-handler="Submit">
+    <label>Brands</label>
+    <select asp-items="Model.MakeDropdownList" asp-for="makeName"></select><br />
+    <label>Categories</label>
+    <select asp-items="Model.CategoryDropdownList" asp-for="categoryName"></select><br />
+    <label>Percentage to adjust</label>
+    <input type="number" step="0.01" asp-for="percentAdjust" /><br />
+    <input type="submit" value="Submit" class="btn btn-info">
+    <p>Remember percent to add is 1.* and percent to lower is 0.* </p>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Products</th>
+                <th>Make</th>
+                <th>Category</th>
+                <th>Product Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.ProductName</td>
+                    <td>@product.MakeName</td>
+                    <td>@product.CategoryName</td>
+                    <td>@product.ProductPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@*02.07.2022 RM Added Comments*@

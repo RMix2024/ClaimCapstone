@@ -1,0 +1,31 @@
+﻿@page
+@model E85Carbs.WebServer.Pages.Makes.MakesMenuModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Manufacture Menu";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped manufacture">
+        <thead>
+            <tr>
+                <th>Manufactures</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var make in Model.Makes)
+            {
+                <tr>
+                    <td class="align-middle">@make.MakeName</td>
+                    <td><a asp-page="/Makes/EditMake" asp-route-id="@make.MakeId" class="btn btn-danger">Edit</a></td>
+                    <td><a asp-page="/Makes/DeleteMake" asp-route-id="@make.MakeId" class="btn btn-danger">Remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<a asp-page="/Makes/AddMake" class="btn btn-success">Add new Make</a>
+

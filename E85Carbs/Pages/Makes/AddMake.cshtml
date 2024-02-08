@@ -1,0 +1,17 @@
+﻿@page "{id?}"
+@model E85Carbs.WebServer.Pages.Makes.AddMakeModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Add Manufacture";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form method="post" asp-page-handler="Submit">
+        <label>Manufacture Name:</label>
+        <input type="text" value="Manufacture to Add" asp-for="@Model.Input.MakeName">
+        <input type="submit" value="Submit" class="text-success">
+    </form>
+</div>

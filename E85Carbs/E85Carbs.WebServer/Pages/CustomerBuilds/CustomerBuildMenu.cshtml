@@ -1,0 +1,36 @@
+﻿@page
+@model E85Carbs.WebServer.Pages.CustomerBuilds.CustomerBuildMenuModel
+@{
+    ViewData["Title"] = "Customer Builds Menu";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a asp-page="/CustomerBuilds/AddCustomerBuild" class="btn btn-success">Add new Customer Build</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mt-4 mb-4">Customer Builds</h2>
+        </div>
+        @foreach (var customerbuild in Model.CustomerBuilds)
+        {
+            <div class="col-md-6 col-lg-4">
+                <!-- Bootstrap 5 card box -->
+                <div class="card-box">
+                    <div class="card-thumbnail">
+                        <img src="data:image/gif;base64,@customerbuild.MainBase64Image" class="img-fluid" alt="Card image cap">
+                    </div>
+                    <h3><a href="#" class="mt-2 text-danger">@customerbuild.CustomerName</a></h3>
+                    <p class="text-secondary">@customerbuild.CustomerBuildDescription</p>
+                    <a type="button" asp-page="/CustomerBuilds/DeleteCustomerBuild" asp-route-id="@customerbuild.CustomerBuildId" class="btn btn-danger float-left">Remove</a>
+                    <a type="button" asp-page="/CustomerBuilds/EditCustomerBuild" asp-route-id="@customerbuild.CustomerBuildId" class="btn btn-info float-left">Edit</a>
+                    <a type="button" asp-page="/BuildGalleryImages/BuildGalleryImagesMenu" asp-route-id="@customerbuild.CustomerBuildId" class="btn btn-success float-left">Photo Gallery Menu</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@*02.07.2022 RM Added Comments*@

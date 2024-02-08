@@ -1,0 +1,21 @@
+﻿@page "{id}"
+@model E85Carbs.WebServer.Pages.Categories.EditCategoryModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h3>@Model.Category.CategoryName</h3>
+
+
+<div>
+    <form method="post" asp-page-handler="Submit">
+        <label>Category Name:</label>
+        <input type="text" asp-for="@Model.Category.CategoryName">
+        <input type="hidden" asp-for="@Model.Category.CategoryID">
+        <input type="submit" value="Submit" class="text-success">
+    </form>
+</div>
+

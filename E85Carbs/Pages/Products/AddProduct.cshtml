@@ -1,0 +1,27 @@
+﻿@page 
+@model E85Carbs.WebServer.Pages.Products.AddProductModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form method="post" enctype="multipart/form-data" asp-page-handler="Submit">
+        <label>Product Name:</label>
+        <input type="text" value="Product to Add" asp-for="@Model.Input.ProductName"><br />
+        <label>Product Price:</label>
+        <input type="number" value="Product Price" step="0.01" asp-for="@Model.Input.ProductPrice"><br />
+        <label>Product Description:</label>
+        <input type="text" value="Product Description" asp-for="@Model.Input.ProductDescription"><br />
+        <label>Manufacture:</label>
+        <select asp-items="Model.MakeDropdownList" asp-for="@Model.Input.MakeName"></select><br />
+        <label>Category:</label>
+        <select asp-items="Model.CategoryDropdownList" asp-for="@Model.Input.CategoryName"></select><br />
+        <label>Product Main Image:</label>
+        <input type="file" asp-for="@Model.Input.MainImageData">        
+        <input type="submit" value="Submit" class="text-success">
+    </form>
+</div>

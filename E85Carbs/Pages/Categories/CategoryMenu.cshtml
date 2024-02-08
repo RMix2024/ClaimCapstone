@@ -1,0 +1,31 @@
+﻿@page
+@model E85Carbs.WebServer.Pages.Categories.CategoryMenuModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Categories Menu";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Categories</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model.Categories)
+            {
+            <tr>
+                <td class="align-middle">@category.CategoryName</td>
+                <td><a asp-page="/Categories/EditCategory" asp-route-id="@category.CategoryID" class="btn btn-danger">Edit</a></td>
+                <td><a asp-page="/Categories/DeleteCategory" asp-route-id="@category.CategoryID" class="btn btn-danger">Remove</a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<a asp-page="/Categories/AddCategory" class="btn btn-success">Add new Category</a>
+

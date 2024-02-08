@@ -1,0 +1,23 @@
+﻿@page
+@model E85Carbs.WebServer.Pages.CustomerBuilds.EditCustomerBuildModel
+@{
+    ViewData["Title"] = "Edit Customer Build";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h3>@Model.CustomerBuild.CustomerName</h3>
+
+
+<div>
+    <form method="post" asp-page-handler="Submit">
+        <p><label>Customer Name:</label><input type="text" asp-for="@Model.CustomerBuild.CustomerName"></p>
+        <p><label>Customer Build Title:</label><input type="text" asp-for="@Model.CustomerBuild.CustomerBuildTitle"></p>
+        <p><label>Customer Build Description:</label><input type="text" asp-for="@Model.CustomerBuild.CustomerBuildDescription"></p>
+        <input type="hidden" asp-for="@Model.CustomerBuild.CustomerBuildId">
+        <input type="hidden" asp-for="@Model.CustomerBuild.MainBase64Image">
+        <input type="submit" value="Submit" class="text-success">
+    </form>
+</div>
+
+
+@*02.07.2022 RM Added Comments*@

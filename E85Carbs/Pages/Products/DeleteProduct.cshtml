@@ -1,0 +1,24 @@
+﻿@page "{id}"
+@model E85Carbs.WebServer.Pages.Products.DeleteProductModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<h2>Are you sure you want to delete this?</h2>
+
+<h3> @Model.product.ProductName</h3>
+
+
+
+<div>
+    <form method="post" asp-page-handler="Delete">
+        <input type="hidden" asp-for="@Model.product.ProductId" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-page="./Products/ProductsMenu">Back to products Menu</a>
+    </form>
+</div>

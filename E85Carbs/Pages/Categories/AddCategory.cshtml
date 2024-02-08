@@ -1,0 +1,19 @@
+﻿@page "{id?}"
+@model E85Carbs.WebServer.Pages.Categories.AddCategoryModel
+@using E85Carbs.WebServer.Models
+@using E85Carbs.WebServer.Data
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form method="post" asp-page-handler="Submit">
+        <label>Category Name:</label>
+        <input type="text" value="Category to Add" asp-for="@Model.Input.CategoryName">
+        <input type="submit" value="Submit" class="text-success">
+    </form>
+</div>
+
+

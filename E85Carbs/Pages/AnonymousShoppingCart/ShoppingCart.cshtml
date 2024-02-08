@@ -1,0 +1,127 @@
+﻿@page "{id?}"
+
+@model E85Carbs.WebServer.Pages.AnonymousShoppingCart.ShoppingCartModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+        ViewData["Title"] = "Shopping Cart";
+ }
+
+@{ 
+    string cartItems;
+    bool cookieCheck = this.Request.Cookies.TryGetValue("cartItems", out cartItems); // checks for cookie y or n
+    List<string>ProductIds = new List<string>();
+    Dictionary<string, int> productQuantity = new Dictionary<string, int>();
+
+    if (cookieCheck == true)
+    {
+        if (cartItems.Contains(','))
+        {
+            ProductIds = cartItems.Split(',').ToList();
+            foreach(var PID in ProductIds)
+            {
+                if (productQuantity.ContainsKey(PID))
+                {
+                    productQuantity[PID] += 1;
+                }
+                else
+                {
+                    productQuantity[PID] = 1;
+                }
+            }
+
+        }
+        else
+        {
+            productQuantity[cartItems] = 1;
+        }
+    }
+}
+
+<section class="clean-block clean-cart dark">
+    <div class=" container">
+            <div class="block-heading">
+                <h2 class="text-info">Shopping Cart</h2>
+            </div>
+        <div class="content">
+            <div class="row no-gutters">
+                <div class="col-md-12 col-lg-8">
+                    <div class="items">
+                        
+                        @foreach (var item in Model.products)
+                        { 
+                            <div class="product">
+                                <div class=" row justify-content-center align-items-center">
+                                    <div class="col-md-2 remove"><a asp-page="/AnonymousShoppingCart/ShoppingCart" asp-page-handler="DeleteFromCart" asp-route-id="@item.ProductId">X</a></div>
+                                    <div class="col-md-3">
+                                        <div class="product-image"><img class="img-fluid d-block mx-auto image" src="data:image/gif;base64,@item.MainBase64Image" /></div>
+                                    </div>
+                                    <div class="col-md-5 pruduct-info">
+                                        <a class="product-name" href="#">@item.ProductName</a>
+                                    </div>
+                                    <div class="col-6 col-md-2 quantity"><label class="d-none d-md-block" for="quantity">Quantity</label><span>@productQuantity[item.ProductId.ToString()]</span></div>
+                                    <div class="col-6 col-md-2 price"><span>$@(item.ProductPrice )</span></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <div class="summary">
+                        <h3>Summary</h3>
+                        <h4><span class="text">Subtotal</span><span class="price">$@Model.Total</span></h4>
+                        <h4><span class="text">Discount</span><span class="price">$0</span></h4>
+                        <h4><span class="text">Shipping</span><span class="price">$0</span></h4>
+                        <h4><span class="text">Total</span><span class="price"> $@Model.products.Sum(x=>x.ProductPrice * productQuantity[x.ProductId.ToString()])</span></h4>
+                    </div>
+                </div>
+                <!--<div>
+                    <div id="paypal-button-container"></div>-->
+
+                            <!-- Include the PayPal JavaScript SDK -->
+                    <!--<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+
+                            <script>                                     // Render the PayPal button into #paypal-button-container
+
+                                     paypal.Buttons({// Set up the transaction
+                                         createOrder: function (data, actions) {
+                                             return actions.order.create({
+                                                 purchase_units: [{
+                                                     amount: {
+                                                         value: '88.44'
+                                                     }
+                                                 }]
+                                             });
+                                         },
+
+                                         // Finalize the transaction
+                                         onApprove: function (data, actions) {
+                                             return actions.order.capture().then(function (orderData) {
+                                                 // Successful capture! For demo purposes:
+                                                 console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                                 var transaction = orderData.purchase_units[0].payments.captures[0];
+                                                 alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                                                 // Replace the above to show a success message within this page, e.g.
+                                                 // const element = document.getElementById('paypal-button-container');
+                                                 // element.innerHTML = '';
+                                                 // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                                 // Or go to another URL:  actions.redirect('thank_you.html');
+                                             });
+                                         }
+
+
+                                     }).render('#paypal-button-container');
+                            </script>
+                </div>-->
+            </div>
+        </div>
+    </div>
+       
+    
+</section>
+
+<div>
+    <a type="button" asp-page="/Store/StoreMainPage" class="btn btn-info">Continue Shopping</a>   
+</div>
+

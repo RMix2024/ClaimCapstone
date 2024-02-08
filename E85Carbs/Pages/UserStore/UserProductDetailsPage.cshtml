@@ -1,0 +1,33 @@
+﻿@page "{id?}"
+@model E85Carbs.WebServer.Pages.UserStore.UserProductDetailsPageModel
+@{
+}
+
+
+<div>
+
+    <div>
+        <h2 class="text-info">Product details</h2>
+    </div>
+
+    <div>
+        <img src="data:image/gif;base64,@Model.product.MainBase64Image" class="img-fluid" alt="Card image cap">
+    </div>
+
+    <div>
+        <div>
+            @foreach (var photo in Model.ProductGalleryImages)
+            {
+                <img class="img-fluid img-thumbnail" src="data:image/gif;base64,@photo.ProductGalleryBase64Image" alt="Card image cap">
+            }
+        </div>
+    </div>
+    <h3><a href="#" class="mt-2 text-danger">@Model.product.ProductName</a></h3>
+    <p>@Model.product.MakeName</p>
+    <p class="text-secondary">@Model.product.ProductDescription</p>
+    <form method="post" asp-page="/UserShoppingCart/UserShoppingCart" >
+        <input type="hidden" name="id" value="@Model.product.ProductId">        
+        <input type="submit" value="Add to cart" class="btn btn-info float-left">
+    </form>
+</div>
+

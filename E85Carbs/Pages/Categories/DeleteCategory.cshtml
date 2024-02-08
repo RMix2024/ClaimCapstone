@@ -1,0 +1,39 @@
+﻿@page "{id}"
+@model E85Carbs.WebServer.Pages.Categories.DeleteCategoryModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Delete Category";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<h3>Are you sure you want to delete this?</h3>
+
+
+<div class="table-responsive">
+    <table class="table table-striped category">
+        <thead>
+            <tr>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Model.category.CategoryName
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div>
+    <form method="post" asp-page-handler="Delete">
+        <input type="hidden" asp-for="@Model.category.CategoryID" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-page="./Categories/CategoryMenu">Back to Category Menu</a>
+    </form>
+</div>

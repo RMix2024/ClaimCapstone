@@ -1,0 +1,33 @@
+﻿@page "{id?}"
+@model E85Carbs.WebServer.Pages.CustomerBuilds.CustomerBuildDetailsModel
+@{
+}
+
+
+<div>
+
+    <div>
+        <h2 class="text-info">Customer Project details</h2>
+    </div>
+
+    <div>
+        <img src="data:image/gif;base64,@Model.CustomerBuild.MainBase64Image" class="img-fluid" alt="Card image cap">
+    </div>
+
+    <div>
+        <div>
+            @foreach (var buildphoto in Model.BuildGalleryImages)
+            {
+                <img class="img-fluid img-thumbnail" src="data:image/gif;base64,@buildphoto.BuildGalleryBase64Image" alt="Card image cap">
+            }
+        </div>
+    </div>
+    <h3><a href="#" class="mt-2 text-danger">@Model.CustomerBuild.CustomerName</a></h3>
+    <p>@Model.CustomerBuild.CustomerName</p>
+    <p class="text-secondary">@Model.CustomerBuild.CustomerBuildDescription</p>
+
+</div>
+
+
+
+@*02.07.2022 RM Added Comments*@

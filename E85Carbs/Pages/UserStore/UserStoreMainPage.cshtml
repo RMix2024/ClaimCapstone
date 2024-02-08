@@ -1,0 +1,110 @@
+﻿@page "{id?}"
+@model E85Carbs.WebServer.Pages.UserStore.UserStoreMainPageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Product Menu";
+}
+
+<h1 class="text-info">@ViewData["Title"]</h1>
+
+
+
+
+<div class="container">
+
+    <div class="content">
+        <div class="col-md-9">
+
+
+
+
+            <form method="post" asp-page-handler="Submit">
+                <label>Brands</label>
+                <select asp-items="Model.MakeDropdownList" asp-for="makeName"></select><br />
+                <label>Categories</label>
+                <select asp-items="Model.CategoryDropdownList" asp-for="categoryName"></select><br />
+                <input type="submit" value="Submit" class="btn btn-info">
+            </form>
+            <div></div>
+            <form method="get">
+                <input type="submit" value="Reset" class="btn btn-warning">
+            </form>
+
+
+
+            <div class="products">
+                <div class="row no-gutters">
+                    @if (Model.Products.Count != 0)
+                    {
+                        @foreach (var product in Model.Products)
+                        {
+
+                            <div class="col-md-4 mt-2">
+                                <div class="card flex-fill">
+                                    <div class="card-body">
+                                        <div class="card-img-actions"> <img src="data:image/gif;base64,@product.MainBase64Image" class="card-img img-fluid" width="96" height="350" alt=""> </div>
+                                    </div>
+                                    <div class="card-body bg-light text-center">
+                                        <div class="mb-2">
+                                            <h6 class="font-weight-semibold mb-2"> <a asp-page="/UserStore/UserProductDetailsPage" asp-route-id="@product.ProductId" class="text-default mb-2" data-abc="true">@product.ProductName</a> </h6> <a href="#" class="text-muted" data-abc="true">@product.CategoryName</a>
+                                        </div>
+                                        <h3 class="mb-0 font-weight-semibold">$@product.ProductPrice</h3>
+                                        <form method="post" asp-page="/UserShoppingCart/UserShoppingCart">
+                                            <input type="hidden" name="id" value="@product.ProductId">
+                                            <input type="submit" value="Add to cart" class="btn btn-info float-left">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        }
+                    }
+                    else
+                    {
+                        <div><h3>There are no Products to display!</h3></div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*<div class="col-12 col-md-6 col-lg-4">
+        <div class="clean-product-item">
+            <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="data:image/gif;base64,@product.MainBase64Image" /></a></div>
+            <div class="product-name"><a asp-page="/UserStore/UserProductDetailsPage" asp-route-id="@product.ProductId">@product.ProductName</a></div>
+            <div class="about">
+                <div class="price">
+                    <h3>$@product.ProductPrice</h3>
+                    <form method="post" asp-page="/UserShoppingCart/UserShoppingCart">
+                        <input type="hidden" name="id" value="@product.ProductId">
+                        <input type="submit" value="Add to cart" class="btn btn-info float-left">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+@*<div class="col-md-4 mt-2">
+    <div class="card">
+            <div class="card-body">
+                <div class="card-img-actions"> <img src="data:image/gif;base64,@product.MainBase64Image" class="card-img img-fluid" width="96" height="350" alt=""> </div>
+            </div>
+            <div class="card-body bg-light text-center">
+                <div class="mb-2">
+                    <h6 class="font-weight-semibold mb-2"> <a asp-page="/UserStore/UserProductDetailsPage" asp-route-id="@product.ProductId" class="text-default mb-2" data-abc="true">">@product.ProductName</a> </h6> <a href="#" class="text-muted" data-abc="true">@product.Category</a>
+                </div>
+                <h3 class="mb-0 font-weight-semibold">$@product.ProductPrice</h3>
+                 <form method="post" asp-page="/UserShoppingCart/UserShoppingCart">
+                                                    <input type="hidden" name="id" value="@product.ProductId">
+                                                    <input type="submit" value="Add to cart" class="btn btn-info float-left">
+                                                </form>
+            </div>
+        </div>
+     </div>*@
